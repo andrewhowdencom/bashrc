@@ -11,4 +11,7 @@ while [ -h "$SOURCE" ]; do
 done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
+source "$DIR/environment.sh"
+source "$DIR/colors.sh"
 source "$DIR/alias.sh"
+source "$DIR/ps1.sh"
