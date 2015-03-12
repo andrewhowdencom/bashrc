@@ -11,3 +11,8 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 echo "source \"$DIR/include.sh\"" >> "$HOME/.bashrc"
+echo "source \"$DIR/include.sh\"" >> "$HOME/.bash_profile"
+
+source "$HOME/.bashrc"
+
+echo "Installed bashrc!"
