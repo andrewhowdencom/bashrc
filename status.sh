@@ -1,0 +1,1 @@
+echo "BASHRC Version: $BASHRC_VERSION"

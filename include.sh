@@ -12,6 +12,7 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 source "$DIR/environment.sh"
+source "$DIR/path.sh"
 source "$DIR/colors.sh"
 source "$DIR/alias.sh"
 source "$DIR/ps1.sh"
