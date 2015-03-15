@@ -17,6 +17,6 @@ case $ENVIRONMENT_TYPE in
         ;;
 esac
 
-PS1="\[$Terminal_Color\]\A \u@\h \[$Color_Off\]\w\[$Terminal_Color\]:\[$Color_Off\]\$(if [[ \$? == 0 ]]; then echo \"$Terminal_OK\"; else echo \"$Terminal_Error (\$?)\"; fi) $ \[$Color_Off\]"
+PS1="\[$Terminal_Color\]\A \u@\h \[$Color_Off\]\w\[$Terminal_Color\]:\[$Color_Off\]\$(if [[ \$? == 0 ]]; then echo \"\[$Terminal_OK\]\"; else echo \"\[$Terminal_Error\] (\$?)\"; fi) $ \[$Color_Off\]"
 
 
