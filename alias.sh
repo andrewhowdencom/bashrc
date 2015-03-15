@@ -1,7 +1,8 @@
 # Aliases
-alias psgr="ps aux | grep -i" # Search running processes for string
-alias cpp="rsync --progress " # Copy with progress bar, using RSYNC
-alias ssh="ssh -v "           # Make ssh more talkative by default
+alias psgr="ps aux | grep -i"  # Search running processes for string
+alias llgr="ls -alF | grep -i" # Search files within a given folder
+alias cpp="rsync --progress "  # Copy with progress bar, using RSYNC
+alias ssh="ssh -v "            # Make ssh more talkative by default
 
 # Enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
