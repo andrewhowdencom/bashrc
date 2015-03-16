@@ -17,6 +17,28 @@ case $ENVIRONMENT_TYPE in
         ;;
 esac
 
-PS1="\[$Terminal_Color\]\A \u@\h \[$Color_Off\]\w\[$Terminal_Color\]:\[$Color_Off\]\$(if [[ \$? == 0 ]]; then echo \"\[$Terminal_OK\]\"; else echo \"\[$Terminal_Error\] (\$?)\"; fi) $ \[$Color_Off\]"
+function set_ps1 {
+  PS1=$BASH_PROMPT
+}
 
+function git_branch {
+    GIT_BRANCH=$(git symbolic-ref HEAD 2> /dev/null)
+    if [[ $? -eq 0 ]]; then
+        echo ${GIT_BRANCH#refs/heads/}
+    fi
+}
+
+LINE_SUMMARY="\[\$(git_branch)\]"
+LINE_PROMPT="\[$Terminal_Color\]\A \u@\h \[$Color_Off\]\w\[$Terminal_Color\]:\[$Color_Off\]\$(if [[ \$? == 0 ]]; then echo \"\[$Terminal_OK\]\"; else echo \"\[$Terminal_Error\] (\$?)\"; fi) $ \[$Color_Off\]"
+BASH_PROMPT=""
+
+if [[ ! -z $LINE_SUMMARY ]]; then
+    BASH_PROMPT="$BASH_PROMPT$LINE_SUMMARY\n";
+fi
+
+if [[ ! -z $LINE_PROMPT ]]; then
+   BASH_PROMPT="$BASH_PROMPT$LINE_PROMPT"
+fi
+
+PROMPT_COMMAND=set_ps1
 
