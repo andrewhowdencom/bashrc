@@ -80,3 +80,5 @@ Terminal_Default=$White
 
 Terminal_Error=$BIRed
 Terminal_OK=$Terminal_Default
+Terminal_Success=$Green
+Terminal_Warning=$BYellow
