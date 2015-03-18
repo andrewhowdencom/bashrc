@@ -24,7 +24,7 @@ function set_ps1 {
 function git_branch {
     GIT_BRANCH=$(git symbolic-ref HEAD 2> /dev/null)
     if [[ $? -eq 0 ]]; then
-        echo ${GIT_BRANCH#refs/heads/}
+        echo "b: "${GIT_BRANCH#refs/heads/}
     fi
 }
 
