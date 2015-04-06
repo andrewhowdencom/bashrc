@@ -2,6 +2,10 @@
 BASHRC
 ======
 
+List of functions
+-----------------
+add-path-composer {} - Adds the composer bin to the $PATH variable if one is found at CWD/vendor/bin
+
 List of Aliases
 ---------------
 

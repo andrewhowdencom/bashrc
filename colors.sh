@@ -73,7 +73,7 @@ On_IWhite='\e[0;107m'   # White
 
 # Defined Standards
 Terminal_Production=$Red
-Terminal_User=$Blue
+Terminal_User=$BBlue
 Terminal_Staging=$Yellow
 Terminal_Development=$Green
 Terminal_Default=$White
