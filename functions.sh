@@ -35,4 +35,44 @@ function php-cron {
    sudo su $1 -c "/usr/bin/php -f $2"
 }
 
+# Web Services
+function status-code {
+    curl -s -o /dev/null -I -w "%{http_code}" "$1"
+}
 
+# Send notification to pushover
+function push-msg {
+    # Set the default
+    Ex_Status=0
+    Result="Successfully"
+    Pushover_Url="https://api.pushover.net/1/messages.json"
+
+    # Check to see if theres an app code
+    if [[ -z $ENVIRONMENT_PUSHOVER_APP ]]; then
+        echo "There is no \$ENVIRONMENT_PUSHOVER_APP environment variable available"
+        return 1
+    fi
+
+    # Check if theres a user code
+    if [[ -z $ENVIRONMENT_PUSHOVER_USER ]]; then
+        echo "There is no \$ENVIRONMENT_PUSHOVER_USER environment variable available"
+    fi
+
+    # Make Request
+    Pushover_Request=$(curl -s \
+        --form-string "token=$ENVIRONMENT_PUSHOVER_APP" \
+        --form-string "user=$ENVIRONMENT_PUSHOVER_USER" \
+        --form-string "message=$1" \
+        $Pushover_Url \
+        -o /dev/null -w "%{http_code}")
+
+    # Determine if it was a failure
+    if [[ "$Pushover_Request" != 200 ]]; then
+        Result="Error ($Pushover_Request): Failed to"
+        Ex_Status=1
+    fi
+    
+    # Provide some feedback
+    echo "$Result dispatched \"$1\" to Pushover"
+    return $Ex_Status
+}
