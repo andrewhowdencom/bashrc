@@ -12,6 +12,9 @@ case $ENVIRONMENT_TYPE in
     development) 
         Terminal_Color=$Terminal_Development
         ;;
+    disposable) 
+        Terminal_Color=$Terminal_Disposable
+        ;; 
     *)
         Terminal_Color=$Terminal_Default
         ;;

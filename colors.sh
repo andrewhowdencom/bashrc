@@ -76,6 +76,7 @@ Terminal_Production=$Red
 Terminal_User=$BBlue
 Terminal_Staging=$Yellow
 Terminal_Development=$Green
+Terminal_Disposable=$Cyan 
 Terminal_Default=$White
 
 Terminal_Error=$BIRed
