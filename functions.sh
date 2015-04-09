@@ -58,10 +58,15 @@ function push-msg {
         echo "There is no \$ENVIRONMENT_PUSHOVER_USER environment variable available"
     fi
 
+    if [[ -z $ENVIRONMENT_PUSHOVER_SOUND ]]; then 
+        ENVIRONMENT_PUSHOVER_SOUND="cashregister"
+    fi;
+
     # Make Request
     Pushover_Request=$(curl -s \
         --form-string "token=$ENVIRONMENT_PUSHOVER_APP" \
         --form-string "user=$ENVIRONMENT_PUSHOVER_USER" \
+        --form-string "sound=$ENVIRONMENT_PUSHOVER_SOUND" \
         --form-string "message=$1" \
         $Pushover_Url \
         -o /dev/null -w "%{http_code}")

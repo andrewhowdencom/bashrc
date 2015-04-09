@@ -5,7 +5,7 @@ BASHRC
 List of functions
 -----------------
 add-path-composer {} - Adds the composer bin to the $PATH variable if one is found at CWD/vendor/bin
-
+push-msg {message} - Pushes a message to the pushover api. Environment variable need to be set (see environment.sh)
 List of Aliases
 ---------------
 

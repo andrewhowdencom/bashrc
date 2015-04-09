@@ -1,3 +1,6 @@
+1.1.5
+- Added "pushover-msg" method 
+
 1.1.4
 - Added "add-path-composer" method prototype. 
 
