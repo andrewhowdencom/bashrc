@@ -19,6 +19,14 @@ function add-path-composer {
     fi
 }
 
+# Function to clear caches locally, save a couple of lines. Also makes sure
+# we don't accidently run the same command on live
+function clear-caches {
+    redis-cli flushall
+    sudo service php5-fpm restart
+    echo "Cleared redis, restarted php5-fpm"
+}
+
 # Function to test whether a PHP file will run successfully via cron as
 # a given user
 function php-cron {
