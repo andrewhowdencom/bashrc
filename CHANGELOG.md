@@ -1,3 +1,7 @@
+1.1.6 
+- Added "settings" file
+- Added setting that prevents autoexec of !foo style bash history
+
 1.1.5
 - Added "pushover-msg" method 
 
