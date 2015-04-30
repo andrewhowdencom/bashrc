@@ -1,3 +1,6 @@
+1.2.0
+- Added mysql-query function
+
 1.1.6 
 - Added "settings" file
 - Added setting that prevents autoexec of !foo style bash history

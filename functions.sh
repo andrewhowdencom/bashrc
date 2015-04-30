@@ -27,6 +27,21 @@ function clear-caches {
     echo "Cleared redis, restarted php5-fpm"
 }
 
+
+# Run a mysql query against the local host
+function mysql-query {
+    ERR_MSG="There is no \$%s environment variable set. Set one to continue"
+    for env in "MYSQL_SERVER" "MYSQL_USER" "MYSQL_PASSWORD" "MYSQL_DATABASE"
+    do 
+      if [[ -z ${!env} ]]; then 
+          echo $(printf "$ERR_MSG" "$env"); 
+          return 1
+      fi
+   done
+
+   mysql --host="$MYSQL_SERVER" --user="$MYSQL_USER" --password="$MYSQL_PASSWORD" --database="$MYSQL_DATABASE" -e "$1"
+}
+
 # Function to test whether a PHP file will run successfully via cron as
 # a given user
 function php-cron {
