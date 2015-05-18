@@ -32,7 +32,7 @@ function git_branch {
 }
 
 LINE_SUMMARY="$Green\[\$(git_branch)\]$Color_Off"
-LINE_PROMPT="\[$Terminal_Color\]\A \u@\h \[$Color_Off\]\w\[$Terminal_Color\]:\[$Color_Off\]\$(if [[ \$? == 0 ]]; then echo \"\[$Terminal_OK\]\"; else echo \"\[$Terminal_Error\] (\$?)\"; fi) $ \[$Color_Off\]"
+LINE_PROMPT="\[$Green\]● \[$Terminal_Color\]\A \u@\h \[$Color_Off\]\w\[$Terminal_Color\]:\[$Color_Off\]\$(if [[ \$? == 0 ]]; then echo \"\[$Terminal_OK\]\"; else echo \"\[$Terminal_Error\] (\$?)\"; fi) $ \[$Color_Off\]"
 BASH_PROMPT=""
 
 if [[ ! -z $LINE_SUMMARY ]]; then

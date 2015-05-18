@@ -15,8 +15,7 @@ Directory Listing
 
 PS1 Key
 -------
-| b: master  | 
-| 00:00      | user | @        | Machine      | ~/Folder
+| ●          | 00:00      | user | @        | Machine      | ~/Folder
 |------------|------|----------|--------------|
-| Git Branch |      |          |              |
+| Status     | Git Branch |      |          |              |
 | Time       | User | @ symbol | Machine Name | Current working directory

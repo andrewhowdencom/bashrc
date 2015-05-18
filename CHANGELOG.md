@@ -1,3 +1,6 @@
+1.2.1
+- Added status ball to PS1 that does nothing at the minute. 
+
 1.2.0
 - Added mysql-query function
 
