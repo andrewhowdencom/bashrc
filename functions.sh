@@ -104,3 +104,9 @@ function push-msg {
     echo "$Result dispatched \"$1\" to Pushover"
     return $Ex_Status
 }
+
+# Name the terminal window
+# http://askubuntu.com/questions/22413/how-to-change-gnome-terminal-title
+function name_terminal {
+    echo -ne "\033]0;$1\007"
+}
