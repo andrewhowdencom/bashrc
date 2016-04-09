@@ -8,9 +8,7 @@ PS1_INCLUDE_HOST=${PS1_INCLUDE_HOST:-FALSE}
 
 PS1_INCLUDE_TIME=${PS1_INCLUDE_TIME:-TRUE}
 
-STATUS_GIT_BRANCH=""
-STATUS_KUBECTL_CONTEXT=""
-EXIT_CODE=""
+ANSI_STATUS_COLOR=$ANSI_COLOR_GREEN
 
 # Determine Environment Type
 case $ENVIRONMENT_TYPE in
@@ -53,8 +51,18 @@ function set_ps1 {
         local BRANCH=$(git symbolic-ref HEAD 2> /dev/null);
 
         if [[ $? -eq 0 && -n "$BRANCH" ]]; then
-          SUMMARY="${SUMMARY}b: ${BRANCH#refs/heads/}"
+            SUMMARY="${SUMMARY}b: ${BRANCH#refs/heads/} "
         fi
+    }
+
+    function set_kube_context {
+        if [[ $PS1_STATUS_KUBE_CONTEXT != TRUE ]]; then return; fi;
+
+        local CONTEXT=$(kubectl config current-context);
+
+        if [[ $? -eq 0 && -n "${CONTEXT}" ]]; then
+          SUMMARY="${SUMMARY}\[$ANSI_STATUS_COLOR\]kube:\[$ANSI_COLOR_OFF\] ${CONTEXT} "
+        fi;
     }
 
     # PROMPT
@@ -77,6 +85,7 @@ function set_ps1 {
 
     # Invoke customisation methods
     # Status line
+    set_kube_context;
     set_git_branch;
 
     # Prompt line
