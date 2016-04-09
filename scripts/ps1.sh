@@ -17,19 +17,19 @@ case $ENVIRONMENT_TYPE in
         ANSI_TERMINAL_COLOR=$ANSI_TERMINAL_PRODUCTION
         ;;
     user)
-        ANSI_TERMINAL_COLOR=$Terminal_User
+        ANSI_TERMINAL_COLOR=$ANSI_TERMINAL_USER
         ;;
     staging)
-        ANSI_TERMINAL_COLOR=$Terminal_Staging
+        ANSI_TERMINAL_COLOR=$ANSI_TERMINAL_STAGING
         ;;
     development)
-        ANSI_TERMINAL_COLOR=$Terminal_Development
+        ANSI_TERMINAL_COLOR=$ANSI_TERMINAL_DEVELOPMENT
         ;;
     disposable)
-        ANSI_TERMINAL_COLOR=$Terminal_Disposable
+        ANSI_TERMINAL_COLOR=$ANSI_TERMINAL_DISPOSABLE
         ;;
     *)
-        ANSI_TERMINAL_COLOR=$Terminal_Default
+        ANSI_TERMINAL_COLOR=$ANSI_TERMINAL_DEFAULT
         ;;
 esac
 
