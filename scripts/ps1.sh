@@ -5,7 +5,7 @@ PS1_STATUS_GIT_BRANCH=${PS1_STATUS_GIT_BRANCH:-FALSE}
 PS1_STATUS_KUBE_CONTEXT=${PS1_STATUS_KUBE_CONTEXT:-FALSE}
 PS1_STATUS_EXIT_CODE=${PS1_STATUS_EXIT_CODE:-FALSE}
 
-PS1_INCLUDE_EXIT_CODE=${PS1_EXIT_CODE_VIEW:-FALSE}
+PS1_INCLUDE_EXIT_CODE=${PS1_INCLUDE_EXIT_CODE:-TRUE}
 PS1_INCLUDE_HOST=${PS1_INCLUDE_HOST:-FALSE}
 PS1_INCLUDE_TIME=${PS1_INCLUDE_TIME:-TRUE}
 PS1_INCLUDE_PATH=${PS1_INCLUDE_PATH:-TRUE}
@@ -79,12 +79,24 @@ function set_ps1 {
         fi;
     }
 
+    function set_prompt_exit_status {
+        if [[ $PS1_INCLUDE_EXIT_CODE != TRUE ]]; then return; fi;
+
+        if [[ $EXIT_CODE != 0 ]]; then
+            local ANSI_COLOR=$ANSI_TERMINAL_ERROR;
+        else
+            local ANSI_COLOR=$ANSI_TERMINAL_SUCCESS;
+        fi;
+
+        PROMPT="${PROMPT}\[$ANSI_COLOR\]●\[$ANSI_COLOR_OFF\]"
+    }
+
     # PROMPT
     function set_prompt_time {
         # Check if we're including time in the prompt
         if [[ $PS1_INCLUDE_TIME != TRUE ]]; then return; fi;
 
-        PROMPT="${PROMPT}\[$ANSI_TERMINAL_COLOR\]\A\[$ANSI_COLOR_OFF\]"
+        PROMPT="${PROMPT} \[$ANSI_TERMINAL_COLOR\]\A\[$ANSI_COLOR_OFF\]"
     }
 
     function set_prompt_host {
@@ -111,6 +123,7 @@ function set_ps1 {
     set_status_exit_code;
 
     # Prompt line
+    set_prompt_exit_status;
     set_prompt_time;
     set_prompt_host;
     set_prompt_path;
