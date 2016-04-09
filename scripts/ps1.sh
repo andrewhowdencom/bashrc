@@ -3,6 +3,7 @@ PS1_ENABLED=${PS1_ENABLED:-FALSE}
 PS1_STATUS=${PS1_STATUS:-FALSE}
 PS1_STATUS_GIT_BRANCH=${PS1_STATUS_GIT_BRANCH:-FALSE}
 PS1_STATUS_KUBE_CONTEXT=${PS1_STATUS_KUBE_CONTEXT:-FALSE}
+PS1_STATUS_EXIT_CODE=${PS1_STATUS_EXIT_CODE:-FALSE}
 PS1_INCLUDE_EXIT_CODE=${PS1_EXIT_CODE_VIEW:-FALSE}
 PS1_INCLUDE_HOST=${PS1_INCLUDE_HOST:-FALSE}
 
@@ -34,6 +35,10 @@ esac
 
 # Sets the PS1 configuration setting
 function set_ps1 {
+    # The exit code variable declaration must be first to catch the previous
+    # commands exit code.
+    EXIT_CODE=$?
+
     # Check if PS1 customisation is enabled.
     if [[ $PS1_ENABLED != TRUE ]]; then return; fi;
     PS1=""
@@ -65,6 +70,14 @@ function set_ps1 {
         fi;
     }
 
+    function set_exit_code {
+        if [[ $PS1_STATUS_EXIT_CODE != TRUE ]]; then return; fi;
+
+        if [[ ${EXIT_CODE} != 0 ]]; then
+            SUMMARY="${SUMMARY}\[${ANSI_TERMINAL_ERROR}\]exit:\[${ANSI_COLOR_OFF}\]: ${EXIT_CODE}"
+        fi;
+    }
+
     # PROMPT
     function set_time {
         # Check if we're including time in the prompt
@@ -89,6 +102,7 @@ function set_ps1 {
     # Status line
     set_kube_context;
     set_git_branch;
+    set_exit_code;
 
     # Prompt line
     set_time;
