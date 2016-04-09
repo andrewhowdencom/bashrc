@@ -4,6 +4,7 @@ PS1_STATUS=${PS1_STATUS:-FALSE}
 PS1_STATUS_GIT_BRANCH=${PS1_STATUS_GIT_BRANCH:-FALSE}
 PS1_STATUS_KUBE_CONTEXT=${PS1_STATUS_KUBE_CONTEXT:-FALSE}
 PS1_INCLUDE_EXIT_CODE=${PS1_EXIT_CODE_VIEW:-FALSE}
+PS1_INCLUDE_HOST=${PS1_INCLUDE_HOST:-FALSE}
 
 PS1_INCLUDE_TIME=${PS1_INCLUDE_TIME:-TRUE}
 
@@ -59,15 +60,19 @@ function set_ps1 {
     # PROMPT
     function set_time {
         # Check if we're including time in the prompt
-        if [[ $PS1_INCLUDE_TIME != TRUE ]]; then
-          return;
-        fi;
+        if [[ $PS1_INCLUDE_TIME != TRUE ]]; then return; fi;
 
+        PROMPT="${PROMPT}\[$ANSI_TERMINAL_COLOR\]\A\[$ANSI_COLOR_OFF\]"
+    }
 
+    function set_host {
+        if [[ $PS1_INCLUDE_HOST != true ]]; then return; fi
+
+        PROMPT="${PROMPT} \[$ANSI_TERMINAL_COLOR\]\u@\h\[$ANSI_COLOR_OFF\]"
     }
 
     function prompt_suffix {
-        PROMPT="${PROMPT}$ "
+        PROMPT="${PROMPT} $ "
     }
 
     # Invoke customisation methods
@@ -76,6 +81,7 @@ function set_ps1 {
 
     # Prompt line
     set_time;
+    set_host;
     prompt_suffix;
 
     if [[ -n "${SUMMARY}" ]]; then
