@@ -88,9 +88,14 @@ function set_ps1 {
     }
 
     function set_prompt_host {
-        if [[ $PS1_INCLUDE_HOST != true ]]; then return; fi
+        if [[ $PS1_INCLUDE_HOST != TRUE ]]; then return; fi;
 
         PROMPT="${PROMPT} \[$ANSI_TERMINAL_COLOR\]\u@\h\[$ANSI_COLOR_OFF\]"
+    }
+
+    function set_prompt_path {
+        if [[ $PS1_INCLUDE_PATH != TRUE ]]; then return; fi;
+        PROMPT="${PROMPT} \w"
     }
 
     function set_prompt_suffix {
@@ -108,6 +113,7 @@ function set_ps1 {
     # Prompt line
     set_prompt_time;
     set_prompt_host;
+    set_prompt_path;
     set_prompt_suffix;
 
     if [[ -n "${SUMMARY}" ]]; then
