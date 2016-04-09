@@ -51,7 +51,7 @@ function set_ps1 {
         local BRANCH=$(git symbolic-ref HEAD 2> /dev/null);
 
         if [[ $? -eq 0 && -n "$BRANCH" ]]; then
-            SUMMARY="${SUMMARY}b: ${BRANCH#refs/heads/} "
+            SUMMARY="${SUMMARY}\[$ANSI_STATUS_COLOR\]branch:\[$ANSI_COLOR_OFF\] ${BRANCH#refs/heads/} "
         fi
     }
 
@@ -82,6 +82,8 @@ function set_ps1 {
     function prompt_suffix {
         PROMPT="${PROMPT} $ "
     }
+
+    # Exit code should be printed in status line when it's not 0.
 
     # Invoke customisation methods
     # Status line
