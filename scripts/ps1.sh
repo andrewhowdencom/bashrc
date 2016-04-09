@@ -14,22 +14,22 @@ EXIT_CODE=""
 # Determine Environment Type
 case $ENVIRONMENT_TYPE in
     production)
-        Terminal_Color=$Terminal_Production
+        TERMINAL_COLOR=$Terminal_Production
         ;;
     user)
-        Terminal_Color=$Terminal_User
+        TERMINAL_COLOR=$Terminal_User
         ;;
     staging)
-        Terminal_Color=$Terminal_Staging
+        TERMINAL_COLOR=$Terminal_Staging
         ;;
     development)
-        Terminal_Color=$Terminal_Development
+        TERMINAL_COLOR=$Terminal_Development
         ;;
     disposable)
-        Terminal_Color=$Terminal_Disposable
+        TERMINAL_COLOR=$Terminal_Disposable
         ;;
     *)
-        Terminal_Color=$Terminal_Default
+        TERMINAL_COLOR=$Terminal_Default
         ;;
 esac
 
@@ -88,7 +88,7 @@ function set_ps1 {
 }
 
 LINE_SUMMARY="$Green\[\$(GIT_BRANCH)\]$Color_Off"
-LINE_PROMPT="\[$Green\]● \[$Terminal_Color\]\A \u@\h \[$Color_Off\]\w\[$Terminal_Color\]:\[$Color_Off\]\$(if [[ \$? == 0 ]]; then echo \"\[$Terminal_OK\]\"; else echo \"\[$Terminal_Error\] (\$?)\"; fi) $ \[$Color_Off\]"
+LINE_PROMPT="\[$Green\]● \[$TERMINAL_COLOR\]\A \u@\h \[$Color_Off\]\w\[$TERMINAL_COLOR\]:\[$Color_Off\]\$(if [[ \$? == 0 ]]; then echo \"\[$Terminal_OK\]\"; else echo \"\[$Terminal_Error\] (\$?)\"; fi) $ \[$Color_Off\]"
 BASH_PROMPT=""
 
 
