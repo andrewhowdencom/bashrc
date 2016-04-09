@@ -10,12 +10,13 @@ while [ -h "$SOURCE" ]; do
   [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" 
 done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+INCLUDES=$DIR/scripts
 
-source "$DIR/environment.sh"
-source "$DIR/settings.sh"
-source "$DIR/functions.sh"
-source "$DIR/path.sh"
-source "$DIR/colors.sh"
-source "$DIR/alias.sh"
-source "$DIR/ps1.sh"
-source "$DIR/status.sh"
+source "$INCLUDES/environment.sh"
+source "$INCLUDES/settings.sh"
+source "$INCLUDES/functions.sh"
+source "$INCLUDES/path.sh"
+source "$INCLUDES/colors.sh"
+source "$INCLUDES/alias.sh"
+source "$INCLUDES/ps1.sh"
+source "$INCLUDES/status.sh"
