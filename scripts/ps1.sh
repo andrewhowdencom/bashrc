@@ -4,10 +4,11 @@ PS1_STATUS=${PS1_STATUS:-FALSE}
 PS1_STATUS_GIT_BRANCH=${PS1_STATUS_GIT_BRANCH:-FALSE}
 PS1_STATUS_KUBE_CONTEXT=${PS1_STATUS_KUBE_CONTEXT:-FALSE}
 PS1_STATUS_EXIT_CODE=${PS1_STATUS_EXIT_CODE:-FALSE}
+
 PS1_INCLUDE_EXIT_CODE=${PS1_EXIT_CODE_VIEW:-FALSE}
 PS1_INCLUDE_HOST=${PS1_INCLUDE_HOST:-FALSE}
-
 PS1_INCLUDE_TIME=${PS1_INCLUDE_TIME:-TRUE}
+PS1_INCLUDE_PATH=${PS1_INCLUDE_PATH:-TRUE}
 
 ANSI_STATUS_COLOR=$ANSI_COLOR_GREEN
 
@@ -46,7 +47,7 @@ function set_ps1 {
     PROMPT=""
 
     # STATUS
-    function set_git_branch {
+    function set_status_git_branch {
 
         # Check if we're including the git branch in the status
         if [[ $PS1_STATUS_GIT_BRANCH != TRUE ]]; then
@@ -60,7 +61,7 @@ function set_ps1 {
         fi
     }
 
-    function set_kube_context {
+    function set_status_kube_context {
         if [[ $PS1_STATUS_KUBE_CONTEXT != TRUE ]]; then return; fi;
 
         local CONTEXT=$(kubectl config current-context);
@@ -70,7 +71,7 @@ function set_ps1 {
         fi;
     }
 
-    function set_exit_code {
+    function set_status_exit_code {
         if [[ $PS1_STATUS_EXIT_CODE != TRUE ]]; then return; fi;
 
         if [[ ${EXIT_CODE} != 0 ]]; then
@@ -79,20 +80,20 @@ function set_ps1 {
     }
 
     # PROMPT
-    function set_time {
+    function set_prompt_time {
         # Check if we're including time in the prompt
         if [[ $PS1_INCLUDE_TIME != TRUE ]]; then return; fi;
 
         PROMPT="${PROMPT}\[$ANSI_TERMINAL_COLOR\]\A\[$ANSI_COLOR_OFF\]"
     }
 
-    function set_host {
+    function set_prompt_host {
         if [[ $PS1_INCLUDE_HOST != true ]]; then return; fi
 
         PROMPT="${PROMPT} \[$ANSI_TERMINAL_COLOR\]\u@\h\[$ANSI_COLOR_OFF\]"
     }
 
-    function prompt_suffix {
+    function set_prompt_suffix {
         PROMPT="${PROMPT} $ "
     }
 
@@ -100,14 +101,14 @@ function set_ps1 {
 
     # Invoke customisation methods
     # Status line
-    set_kube_context;
-    set_git_branch;
-    set_exit_code;
+    set_status_kube_context;
+    set_status_git_branch;
+    set_status_exit_code;
 
     # Prompt line
-    set_time;
-    set_host;
-    prompt_suffix;
+    set_prompt_time;
+    set_prompt_host;
+    set_prompt_suffix;
 
     if [[ -n "${SUMMARY}" ]]; then
         PS1="${PS1}${SUMMARY}\n"
