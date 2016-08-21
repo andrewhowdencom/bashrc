@@ -10,7 +10,7 @@ PS1_INCLUDE_HOST=${PS1_INCLUDE_HOST:-FALSE}
 PS1_INCLUDE_TIME=${PS1_INCLUDE_TIME:-TRUE}
 PS1_INCLUDE_PATH=${PS1_INCLUDE_PATH:-TRUE}
 
-ANSI_STATUS_COLOR=$ANSI_COLOR_GREEN
+ANSI_STATUS_COLOR=${ANSI_COLOR_WHITE}
 
 # Determine Environment Type
 case $ENVIRONMENT_TYPE in
@@ -62,12 +62,24 @@ function set_ps1 {
     }
 
     function set_status_kube_context {
-        if [[ $PS1_STATUS_KUBE_CONTEXT != TRUE ]]; then return; fi;
+        if [[ $PS1_STATUS_KUBE_CONTEXT != TRUE ]]; then
+            return;
+        fi;
 
-        local CONTEXT=$(kubectl config current-context);
+        if [[ $? -eq 0 && $(which kubectl) ]]; then
+          local CONTEXT=$(kubectl config current-context);
 
-        if [[ $? -eq 0 && -n "${CONTEXT}" ]]; then
-          SUMMARY="${SUMMARY}\[$ANSI_STATUS_COLOR\]kube:\[$ANSI_COLOR_OFF\] ${CONTEXT} "
+          # Determine whether the cluster is a local, staging or prod cluster
+          # Default is the prod cluster
+          local COLOR=${ANSI_TERMINAL_PRODUCTION}
+
+          # Check if it's a local environment
+          echo "${CONTEXT}" | grep -E 'minikube|local-|lcl-' > /dev/null && COLOR=${ANSI_TERMINAL_DEVELOPMENT}
+
+          # Check if it's a staging environment
+          echo "${CONTEXT}" | grep -E 'staging-|stg-' > /dev/null && COLOR=${ANSI_TERMINAL_STAGING}
+
+          SUMMARY="${SUMMARY}\[$ANSI_STATUS_COLOR\]kube:\[${COLOR}\] ${CONTEXT}\[${ANSI_COLOR_OFF}\] "
         fi;
     }
 
