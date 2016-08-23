@@ -79,7 +79,7 @@ function set_ps1 {
           # Check if it's a staging environment
           echo "${CONTEXT}" | grep -E 'staging-|stg-' > /dev/null && COLOR=${ANSI_TERMINAL_STAGING}
 
-          SUMMARY="${SUMMARY}\[$ANSI_STATUS_COLOR\]kube:\[${COLOR}\] ${CONTEXT}\[${ANSI_COLOR_OFF}\] "
+          SUMMARY="${SUMMARY}\[$ANSI_STATUS_COLOR\]k8s:\[${COLOR}\] ${CONTEXT}\[${ANSI_COLOR_OFF}\] "
         fi;
     }
 
