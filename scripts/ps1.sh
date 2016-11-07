@@ -114,7 +114,7 @@ function set_ps1 {
     function set_prompt_host {
         if [[ $PS1_INCLUDE_HOST != TRUE ]]; then return; fi;
 
-        PROMPT="${PROMPT} \[$ANSI_TERMINAL_COLOR\]\u@\h\[$ANSI_COLOR_OFF\]"
+        PROMPT="${PROMPT} [\u] \[$ANSI_TERMINAL_COLOR\]\h\[$ANSI_COLOR_OFF\]"
     }
 
     function set_prompt_path {
